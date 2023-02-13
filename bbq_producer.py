@@ -86,4 +86,5 @@ with open("smoker-temps.csv", "r") as file:
     send_message("localhost", "02-food-B", "message_food_B")
 
     # sleep for thirty seconds
-    time.sleep(30)
+    # we will use 3 seconds to test so it doesn't take as long
+    time.sleep(3)
