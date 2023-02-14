@@ -21,6 +21,11 @@ def offer_rabbitmq_admin_site(show_offer):
             webbrowser.open_new("http://localhost:15672/#/queues")
             print()
 
+# def variables
+queue1 = "01-smoker"
+queue2 = "02-food-A"
+queue3 = "02-food-B"
+
 def send_message(host: str, queue_name: str, message: str):
     """
     Creates and sends a message to the queue each execution.
@@ -28,7 +33,9 @@ def send_message(host: str, queue_name: str, message: str):
 
     Parameters:
         host (str): the host name or IP address of the RabbitMQ server
-        queue_name (str): the name of the queue
+        queue1 (str): the queue for the smoker temp
+        queue2 (str): the queue for the first food temperature reading
+        queue3 (str): the queue for the second food temperature reading
         message (str): the message to be sent to the queue
     """
 
@@ -36,19 +43,20 @@ def send_message(host: str, queue_name: str, message: str):
         # Establish a connection with RabbitMQ server
         conn = pika.BlockingConnection(pika.ConnectionParameters(host))
         ch = conn.channel()
-
-        # use the channel to delete the queue
-        # We use queue_delete to ensure that our queue_declare has been cleared and does not contain messages from previous usage.
-        ch.queue_delete(queue="01-smoker")
-        ch.queue_delete(queue="02-food-A")
-        ch.queue_delete(queue="03-food-B")
-
         # use the channel to declare a durable queue
         # a durable queue will survive a RabbitMQ server restart
         # and help ensure messages are processed in order
+
+        # Delete previous messages from queue
+        ch.queue_delete(queue1)
+        ch.queue_delete(queue2)
+        ch.queue_delete(queue3)
+
         ch.queue_declare(queue="01-smoker", durable=True)
         ch.queue_declare(queue="02-food-A", durable=True)
         ch.queue_declare(queue="03-food-B", durable=True)
+
+        ch.basic_publish(exchange="", routing_key=queue_name, body=message)
 
         # print a message to the console for the user
         print(f" [x] Sent {message}")
