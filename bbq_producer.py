@@ -93,8 +93,8 @@ def csv_file(data_file):
         try:
             food_a_channel2 = float(row[2])
             fstring_food_a_message = f"[{fstring_time_column}, {food_a_channel2}]"
-            food_a_temp_message = fstring_food_a_message.encode()
-            send_message(host, food_a_queue, food_a_temp_message)
+            food_a_message = fstring_food_a_message.encode()
+            send_message(host, food_a_queue, food_a_message)
         except ValueError:
             pass    
 
@@ -118,9 +118,6 @@ if __name__ == "__main__":
     # ask the user if they would like to open the RabbitMQ Admmin
     offer_rabbitmq_admin_site('True')
 
- # delete queues to clear old messages
-    delete_queue(host, smoker_queue)
-    delete_queue(host, food_a_queue)
-    delete_queue(host, food_b_queue)
-    
-    csv_file(data_file)
+    send_message('localhost',"smoker_queue", "smoker_message")
+    send_message('localhost',"food_a_queue", "food_a_temp_message") 
+    send_message('localhost',"food_b_queue", "food_b_message")
