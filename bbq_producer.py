@@ -106,18 +106,18 @@ def csv_file(data_file):
         except ValueError:
             pass
 
-    # Sleep for 30 seconds
-    # We can use 3 seconds to test
-    time.sleep(3)
-
 # Standard Python idiom to indicate main program entry point
 # This allows us to import this module and use its functions
 # without executing the code below.
 # If this is the program being run, then execute the code below
 if __name__ == "__main__":
     # ask the user if they would like to open the RabbitMQ Admmin
-    offer_rabbitmq_admin_site('True')
+    offer_rabbitmq_admin_site('true')
 
     send_message('localhost',"smoker_queue", "smoker_message")
     send_message('localhost',"food_a_queue", "food_a_temp_message") 
     send_message('localhost',"food_b_queue", "food_b_message")
+
+    # Sleep for 30 seconds
+    # We can use 3 seconds to test
+    time.sleep(3)
