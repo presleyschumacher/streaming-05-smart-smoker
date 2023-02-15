@@ -73,3 +73,6 @@
 ## Sources
 https://www.tibco.com/reference-center/what-is-streaming-data
 https://www.rabbitmq.com
+
+## Screenshot of Messages Sent to Queue
+![Screen Shot 2023-02-14 at 9 02 27 PM](https://user-images.githubusercontent.com/105391626/218916503-85e624a6-6e64-42c7-87df-b60a60790735.png)
