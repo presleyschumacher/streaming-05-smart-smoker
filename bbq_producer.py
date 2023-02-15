@@ -114,10 +114,10 @@ if __name__ == "__main__":
     # ask the user if they would like to open the RabbitMQ Admmin
     offer_rabbitmq_admin_site('true')
 
+    # Send Messages
     send_message('localhost',"smoker_queue", "smoker_message")
     send_message('localhost',"food_a_queue", "food_a_temp_message") 
     send_message('localhost',"food_b_queue", "food_b_message")
 
     # Sleep for 30 seconds
-    # We can use 3 seconds to test
-    time.sleep(3)
+    time.sleep(30)
