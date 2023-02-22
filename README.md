@@ -1,4 +1,4 @@
-## Week 5: Smart Smoker
+## Week 5: Smart Smoker Producer
 
 > Use RabbitMQ to create a producer that will be used to monitor data from the sensors of a running barbeque smoker. Read one value every 30 seconds
 
